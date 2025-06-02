@@ -25,20 +25,12 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { signUp } from "./auth.action";
-
-export const signUpSchema = z
-  .object({
-    name: z.string().min(5),
-    email: z.string().email(),
-    password: z.string().min(8),
-    confirmPassword: z.string().min(8),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Passwords do not match",
-  });
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { signUpSchema } from "./schemas";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -50,8 +42,13 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof signUpSchema>) => {
-    await signUp(values);
-    console.log(values);
+    const res = await signUp(values);
+    if (res.success) {
+      toast.success("Sign up successful");
+      router.push("/dashboard");
+    } else {
+      toast.error(res.error);
+    }
   };
 
   return (

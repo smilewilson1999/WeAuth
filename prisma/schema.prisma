@@ -23,7 +23,7 @@ model User {
 model Session {
   id        String   @id
   userId    String
-  expiredAt DateTime
+  expiresAt DateTime
 
   user      User     @relation(fields: [userId], references: [id])
 }
