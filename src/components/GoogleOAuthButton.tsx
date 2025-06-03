@@ -17,8 +17,7 @@ const GoogleOAuthButton = () => {
   };
   return (
     <Button
-      variant="outline"
-      className="w-full max-w-[500px]"
+      className="w-full bg-black hover:bg-black/90 text-white"
       onClick={() => handleGoogleOAuth()}
     >
       <RiGoogleFill />

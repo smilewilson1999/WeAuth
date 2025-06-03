@@ -48,14 +48,14 @@ const SignInForm = () => {
   };
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="min-w-[500px] transition-all duration-300 ease-in-out">
+      {/* <CardHeader>
         <CardTitle>Sign In</CardTitle>
         <CardDescription>Sign in to your account</CardDescription>
-      </CardHeader>
+      </CardHeader> */}
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="email"
@@ -90,7 +90,7 @@ const SignInForm = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="self-start">
+            <Button type="submit" className="w-full h-10 font-medium">
               Sign In
             </Button>
           </form>

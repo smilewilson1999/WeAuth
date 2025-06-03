@@ -52,11 +52,11 @@ const SignUpForm = () => {
   };
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="min-w-[500px] transition-all duration-300 ease-in-out">
+      {/* <CardHeader>
         <CardTitle>Sign Up</CardTitle>
         <CardDescription>Sign up to your account</CardDescription>
-      </CardHeader>
+      </CardHeader> */}
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -128,14 +128,14 @@ const SignUpForm = () => {
                 </FormItem>
               )}
             />
-            <div className="flex items-center gap-2">
-              <Checkbox id="terms" required />
-              <FormDescription>
-                click the box means you agree to our terms and conditions
+            <div className="flex items-start gap-3">
+              <Checkbox id="terms" required className="mt-0.5" />
+              <FormDescription className="text-sm leading-relaxed">
+                I agree to the terms and conditions and privacy policy
               </FormDescription>
             </div>
-            <Button type="submit" className="self-start">
-              Sign Up
+            <Button type="submit" className="w-full h-10 font-medium">
+              Create Account
             </Button>
           </form>
         </Form>
