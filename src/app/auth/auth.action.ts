@@ -8,6 +8,9 @@ import { Argon2id } from "oslo/password";
 import { lucia } from "@/lib/lucia";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { googleOauthClient } from "@/lib/googleOauth";
+import { generateCodeVerifier } from "arctic";
+import { generateState } from "arctic";
 
 export const signIn = async (values: z.infer<typeof signInSchema>) => {
   try {
@@ -101,4 +104,34 @@ export const signOut = async () => {
     sessionCookie.attributes
   );
   return redirect("/auth");
+};
+
+export const getGoogleOauthConsentUrl = async () => {
+  try {
+    const state = generateState();
+    const codeVerifier = generateCodeVerifier();
+
+    const cookieStore = await cookies();
+    cookieStore.set("codeVerifier", codeVerifier, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/",
+    });
+    cookieStore.set("state", state, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/",
+    });
+
+    const authUrl = await googleOauthClient.createAuthorizationURL(
+      state,
+      codeVerifier,
+      ["email", "profile"]
+    );
+    return { success: true, url: authUrl.toString() };
+  } catch (error) {
+    return { success: false, error: "Something went wrong" };
+  }
 };

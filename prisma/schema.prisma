@@ -16,6 +16,7 @@ model User {
   name           String
   email          String     @unique
   hashedPassword String?
+  picture        String?
   role           String?    @default("user")
   sessions       Session[]
 }
