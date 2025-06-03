@@ -2,6 +2,10 @@
 
 A modern, customizable authentication template to help developers implement secure and flexible authentication systems.
 
+<p align="center">
+  <img width="500" height="500" alt="WeAuth Demo" src="https://github.com/user-attachments/assets/425e23bf-0f6f-41ef-8183-8f4564347796/" />
+</p>
+
 ## 🚀 Overview
 
 WeAuth provides developers with a highly customizable authentication template that leverages the best modern authentication libraries and frameworks. Whether you're building a simple login system or a complex multi-provider authentication flow, WeAuth gives you the foundation to create secure, scalable authentication for your applications.
